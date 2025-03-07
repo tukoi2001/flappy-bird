@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://fflappyy-bird-gamee.surge.sh/sitemap.xml
+Sitemap: fflappyy-bird-phaser.surge.sh/sitemap.xml
