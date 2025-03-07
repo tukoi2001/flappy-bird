@@ -14,3 +14,8 @@ export const THEME = {
   DAY: "day",
   NIGHT: "night",
 };
+
+export const PIPE_COLOR = {
+  GREEN: "green",
+  RED: "red",
+};

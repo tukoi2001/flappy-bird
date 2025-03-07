@@ -3,18 +3,21 @@ import { STYLE_TEXT } from "../constants/common";
 import { THEME } from "../constants/configuration";
 import { STORAGE_KEY } from "../constants/storage-key";
 import { getLocalStorage } from "../utils/storage";
-import GameScene from "./GameScene";
 
-class HomeScene extends Phaser.Scene {
+class PauseScene extends Phaser.Scene {
   constructor() {
-    super("HomeScene");
-    this.homeContainer = null;
+    super("PauseScene");
+    this.pauseContainer = null;
+    this.menuData = [
+      { name: "continue", text: "Continue", yOffset: -25 },
+      { name: "exit", text: "Exit", yOffset: 25 },
+    ];
   }
 
   create() {
     const theme = getLocalStorage(STORAGE_KEY.THEME) || THEME.DAY;
     this.input.setDefaultCursor("default");
-    this.homeContainer = this.add.container(0, 0);
+    this.pauseContainer = this.add.container(0, 0);
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
 
@@ -26,25 +29,20 @@ class HomeScene extends Phaser.Scene {
     const background = this.add
       .image(width / 2, height / 2, backgroundKey)
       .setOrigin(0.5);
-    this.homeContainer.add(background);
+    this.pauseContainer.add(background);
     const messageStartImage = this.add
       .image(width / 2, 50, IMAGE_KEY.MESSAGE_START)
       .setOrigin(0.5);
-    this.homeContainer.add(messageStartImage);
+    this.pauseContainer.add(messageStartImage);
 
-    const menuData = [
-      { name: "startGame", text: "Start Game", yOffset: -50 },
-      { name: "configuration", text: "Configuration", yOffset: 0 },
-      { name: "bestScore", text: "Best Score", yOffset: 50 },
-    ];
-
-    menuData.forEach((menuItemData) => {
+    // Menu
+    this.menuData.forEach((menuItemData) => {
       const container = this.createMenuItemContainer(
         menuItemData.name,
         menuItemData.text,
         menuItemData.yOffset
       );
-      this.homeContainer.add(container);
+      this.pauseContainer.add(container);
 
       const menuBox = container.getAt(0);
       container.setSize(menuBox.width, menuBox.height);
@@ -92,18 +90,15 @@ class HomeScene extends Phaser.Scene {
   }
 
   handleMenuItemClick(name) {
-    if (!this.scene.get("GameScene")) {
-      this.scene.add("GameScene", GameScene);
-    }
     switch (name) {
-      case "startGame":
-        this.scene.start("GameScene");
+      case "continue":
+        this.scene.resume("GameScene");
+        this.scene.stop();
         break;
-      case "configuration":
-        this.scene.start("ConfigurationScene");
-        break;
-      case "bestScore":
-        this.scene.start("BestScoreScene");
+      case "exit":
+        this.scene.remove("GameScene");
+        this.scene.start("HomeScene");
+        this.scene.remove();
         break;
       default:
         break;
@@ -111,4 +106,4 @@ class HomeScene extends Phaser.Scene {
   }
 }
 
-export default HomeScene;
+export default PauseScene;

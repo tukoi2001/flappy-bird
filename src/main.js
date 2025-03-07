@@ -5,6 +5,7 @@ import HomeScene from "./scenes/HomeScene";
 import GameScene from "./scenes/GameScene";
 import BestScoreScene from "./scenes/BestScoreScene";
 import ConfigurationScene from "./scenes/ConfigurationScene";
+import PauseScene from "./scenes/PauseScene";
 
 const config = {
   type: Phaser.AUTO,
@@ -13,11 +14,6 @@ const config = {
   pixelArt: true,
   physics: {
     default: "arcade",
-    arcade: {
-      gravity: {
-        y: 300,
-      },
-    },
   },
   scene: [
     BootScene,
@@ -26,6 +22,7 @@ const config = {
     GameScene,
     BestScoreScene,
     ConfigurationScene,
+    PauseScene,
   ],
 };
 

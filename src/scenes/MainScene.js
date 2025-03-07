@@ -1,3 +1,4 @@
+import { ANIMATION_KEY } from "../constants/animation-key";
 import {
   AUDIO_KEY,
   IMAGE_KEY,
@@ -185,8 +186,76 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
-    // Animation
+    //   Animations
+    this.createAnimations();
+    // Start
     this.scene.start("HomeScene");
+  }
+
+  createAnimations() {
+    // Ground animations
+    this.anims.create({
+      key: ANIMATION_KEY.GROUND_MOVING,
+      frames: this.anims.generateFrameNumbers(SPRITE_SHEETS_KEY.GROUND, {
+        start: 0,
+        end: 2,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: ANIMATION_KEY.GROUND_STOP,
+      frames: [{ key: SPRITE_SHEETS_KEY.GROUND, frame: 0 }],
+      frameRate: 20,
+    });
+
+    // Red Bird Animations
+    this.anims.create({
+      key: ANIMATION_KEY.BIRD_RED_CLAP_WINGS,
+      frames: this.anims.generateFrameNumbers(SPRITE_SHEETS_KEY.BIRD_RED, {
+        start: 0,
+        end: 2,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: ANIMATION_KEY.BIRD_RED_STOP,
+      frames: [{ key: SPRITE_SHEETS_KEY.BIRD_RED, frame: 1 }],
+      frameRate: 20,
+    });
+
+    // Blue Bird animations
+    this.anims.create({
+      key: ANIMATION_KEY.BIRD_BLUE_CLAP_WINGS,
+      frames: this.anims.generateFrameNumbers(SPRITE_SHEETS_KEY.BIRD_BLUE, {
+        start: 0,
+        end: 2,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: ANIMATION_KEY.BIRD_BLUE_STOP,
+      frames: [{ key: SPRITE_SHEETS_KEY.BIRD_BLUE, frame: 1 }],
+      frameRate: 20,
+    });
+
+    // Yellow Bird animations
+    this.anims.create({
+      key: ANIMATION_KEY.BIRD_YELLOW_CLAP_WINGS,
+      frames: this.anims.generateFrameNumbers(SPRITE_SHEETS_KEY.BIRD_YELLOW, {
+        start: 0,
+        end: 2,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: ANIMATION_KEY.BIRD_YELLOW_STOP,
+      frames: [{ key: SPRITE_SHEETS_KEY.BIRD_YELLOW, frame: 1 }],
+      frameRate: 20,
+    });
   }
 }
 
