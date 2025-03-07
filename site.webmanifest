@@ -1,0 +1,89 @@
+{
+  "name": "Flappy Bird Game",
+  "short_name": "Flappy Bird",
+  "description": "Trải nghiệm trò chơi Flappy Bird miễn phí trực tuyến",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "background_color": "#70c5ce",
+  "theme_color": "#70c5ce",
+  "orientation": "portrait-primary",
+  "categories": ["games", "entertainment"],
+  "lang": "vi-VN",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "./favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/assets/images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/images/start-game.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Màn hình chơi Flappy Bird"
+    },
+    {
+      "src": "/assets/images/die.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Màn hình Game Over"
+    },
+    {
+      "src": "/assets/images/home.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Màn hình Menu"
+    },
+    {
+      "src": "/assets/images/best-score.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Màn hình Best score"
+    },
+    {
+      "src": "/assets/images/configuration.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Màn hình Configuration"
+    },
+    {
+      "src": "/assets/images/pause.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Màn hình pause"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import PauseScene from "./scenes/PauseScene";
 
 const config = {
   type: Phaser.AUTO,
+  parent: "game-container",
   width: 288,
   height: 512,
   pixelArt: true,

@@ -13,27 +13,27 @@ Tu Xuan
 
 ## Game screenshots
 
-![Main menu](images/home.png)
+![Main menu](public/assets/images/home.png)
 
 _Main menu_
 
-![Best score](images/best-score.png)
+![Best score](public/assets/images/best-score.png)
 
 _Best score_
 
-![Playing](images/start-game.png)
+![Playing](public/assets/images/start-game.png)
 
 _Playing_
 
-![Game over](images/die.png)
+![Game over](public/assets/images/die.png)
 
 _Game over_
 
-![Configuration](images/configuration.png)
+![Configuration](public/assets/images/configuration.png)
 
 _Configuration_
 
-![Pause](images/pause.png)
+![Pause](public/assets/images/pause.png)
 
 _Pause_
 
