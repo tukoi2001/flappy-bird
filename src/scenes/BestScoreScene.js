@@ -68,9 +68,9 @@ class BestScoreScene extends Phaser.Scene {
 
   createScoreDisplay(scoreValue, yPosition, group) {
     const scoreText = String(scoreValue);
-    const charWidth = 40;
+    const charWidth = 22;
     const width = this.cameras.main.width;
-    const centerX = width / 2 + 40;
+    const centerX = width / 2 + 22;
 
     if (scoreText.length === 1) {
       group

@@ -51,6 +51,7 @@ class GameScene extends Phaser.Scene {
     this.createEvent = null;
     this.countDownText = null;
     this.initialTime = 0;
+    this.debugGraphics = null; // For debug drawing
   }
 
   create() {
@@ -242,7 +243,9 @@ class GameScene extends Phaser.Scene {
       this.player,
       this.gapsGroup,
       this.updateScore,
-      null,
+      function (player, gap) {
+        return player.x > gap.x + gap.body.width;
+      },
       this
     );
     this.ground.anims.play(ANIMATION_KEY.GROUND_MOVING, true);
@@ -263,16 +266,19 @@ class GameScene extends Phaser.Scene {
   }
 
   updateScore(_player, gap) {
-    this.score++;
-    gap.destroy();
-    this.updateScoreboard();
+    if (!gap.counted) {
+      this.score++;
+      gap.counted = true;
+      gap.destroy();
+      this.updateScoreboard();
+    }
   }
 
   updateScoreboard() {
     this.sound.play(AUDIO_KEY.POINT, { volume: 1 });
     this.scoreboardGroup.clear(true, true);
     const scoreText = String(this.score);
-    const charWidth = 40;
+    const charWidth = 24;
     const centerX = this.width / 2;
     if (scoreText.length === 1) {
       this.scoreboardGroup
@@ -293,40 +299,29 @@ class GameScene extends Phaser.Scene {
   makePipes() {
     if (!this.gameStarted || this.gameOver) return;
 
-    let minPipeY = -120;
-    let maxPipeY = 120;
+    let minPipeY = -80;
+    let maxPipeY = 80;
 
     if (this.selectedDifficulty === DIFFICULTY.MEDIUM) {
       minPipeY = -100;
       maxPipeY = 100;
     } else if (this.selectedDifficulty === DIFFICULTY.HARD) {
-      minPipeY = -80;
-      maxPipeY = 80;
+      minPipeY = -120;
+      maxPipeY = 120;
     }
 
     const pipeTopY = Phaser.Math.Between(minPipeY, maxPipeY);
+    const gapSize = this.getGapSize();
+    const pipeX = this.getPipeX();
 
-    // Adjust gap size based on difficulty
-    let gapSize = 98;
-
-    if (this.selectedDifficulty === DIFFICULTY.MEDIUM) {
-      gapSize = 85;
-    } else if (this.selectedDifficulty === DIFFICULTY.HARD) {
-      gapSize = 70;
-    }
-
-    let pipeX = 400;
-
-    if (this.selectedDifficulty === DIFFICULTY.MEDIUM) {
-      pipeX = 350;
-    } else if (this.selectedDifficulty === DIFFICULTY.HARD) {
-      pipeX = 300;
-    }
-
-    const gap = this.add.line(pipeX + 12, pipeTopY + 210, 0, 0, 0, gapSize);
+    // Create the rectangle for the gap
+    const gapHeight = gapSize;
+    const gapY = pipeTopY + 210 + gapHeight / 2;
+    const gap = this.add.rectangle(pipeX + 100, gapY, 5, gapHeight, 0, 0);
+    gap.setOrigin(1);
     this.physics.add.existing(gap);
     gap.body.allowGravity = false;
-    gap.visible = false;
+    gap.counted = false;
     this.gapsGroup.add(gap);
 
     // Pipe top
@@ -340,6 +335,26 @@ class GameScene extends Phaser.Scene {
       this.getPipeBottom()
     );
     pipeBottom.body.allowGravity = false;
+  }
+
+  getGapSize() {
+    let gapSize = 100;
+    if (this.selectedDifficulty === DIFFICULTY.MEDIUM) {
+      gapSize = 85;
+    } else if (this.selectedDifficulty === DIFFICULTY.HARD) {
+      gapSize = 70;
+    }
+    return gapSize;
+  }
+
+  getPipeX() {
+    let pipeX = 400;
+    if (this.selectedDifficulty === DIFFICULTY.MEDIUM) {
+      pipeX = 350;
+    } else if (this.selectedDifficulty === DIFFICULTY.HARD) {
+      pipeX = 300;
+    }
+    return pipeX;
   }
 
   getPipeTop() {
